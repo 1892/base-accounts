@@ -1,4 +1,4 @@
-** Base Accounts App **
+
 
 base-accounts
 =============
