@@ -29,12 +29,12 @@ class EmailActivation:
         self.user.activation_key = key
         self.user.expiration_date = timezone.now() + datetime.timedelta(days=1)
         self.user.save()
-
+        print(settings.HOST, self.success_url)
         subject = "Confirmation of registration"
         txt = """Thank you for registration,
             please click the following link in order to confirm your registration:
             {link}?activation={key}
-            """.format(link="".join([settings.HOST, self.success_url]), key=key)
+            """.format(link="".join([settings.HOST, str(self.success_url)]), key=key)
         to = [self.user.email]
         from_email = settings.EMAIL_HOST_USER
         EmailMessage(subject, txt, to=to, from_email=from_email).send()

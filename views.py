@@ -102,6 +102,8 @@ class BaseUserLoginView(FormView):
 
         if user.is_active:
             login(self.request, user)
+            if self.request.session.get('email', None):
+                del self.request.session['email']
             return super(BaseUserLoginView, self).form_valid(form)
         else:
             return self.form_invalid(form)
