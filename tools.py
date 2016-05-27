@@ -8,12 +8,16 @@ from django.core.urlresolvers import reverse
 from django.core.mail import send_mail, EmailMessage
 
 
-def get_pic_file_name(instance, filename):
-    """
-    Sets default destination of user`s avatar pic path and changes filename
-    to `time + filename` to prevent duplicate file names.
-    """
-    return "accounts/avatar/%s_%s" % (str(time()).replace('.', '_'), filename)
+class FileName:
+    image_file_path = "accounts/avatar/"
+
+    @staticmethod
+    def get_pic_file_name(instance, filename):
+        """
+        Sets default destination of user`s avatar pic path and changes filename
+        to `time + filename` to prevent duplicate file names.
+        """
+        return "{}/{}_{}".format(cls.image_file_path, str(time()).replace('.', '_'), filename)
 
 
 # Email confirmation

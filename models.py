@@ -53,12 +53,16 @@ class BaseUser(AbstractBaseUser, PermissionsMixin):
 
 
 class BaseProfile(models.Model):
-    user = models.OneToOneField(USER_MODEL)
+    user = models.OneToOneField(USER_MODEL, related_name="profile")
     birthday = models.DateField(blank=True, null=True)
-    profile_picture = models.ImageField(blank=True, null=True, upload_to=get_pic_file_name)
+    profile_picture = models.ImageField(blank=True, null=True, upload_to=FileName.get_pic_file_name)
+    gender = models.CharField(max_length=2, choices=GENDER_CHOICES, blank=True, null=True)
     social_picture = models.CharField(max_length=255, blank=True, null=True)
     social_id = models.CharField(max_length=125, blank=True, null=True)
-    gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
+    social_link = models.CharField(max_length=100, blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user.username
