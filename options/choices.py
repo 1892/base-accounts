@@ -1,3 +1,3 @@
-#Gender choices
-GENDER_CHOICES = (('male', 'm'),
-                  ('female', 'f'))
+# Gender choices
+GENDER_CHOICES = (('male', 'male'),
+                  ('female', 'female'))
